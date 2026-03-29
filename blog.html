@@ -8,9 +8,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Us</title>
-    <meta name="keywords" content="test">
-<meta name="description" content="About page">
+    <title>Page</title>
+    <meta name="keywords" content="blog">
+<meta name="description" content="blog">
     <!-- Fancybox CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
     <!-- Theme stylesheet -->
@@ -105,7 +105,105 @@
 
 
 
-<h1>About Us</h1>
+<style>
+    /* ── LOAD MORE ── */
+    .load-more-wrap {
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    #loadMoreBtn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 40px 10px;
+        background: var(--primary);
+        color: var(--white);
+        border: none;
+        border-radius: 0;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.2s;
+        font-size: 2.6rem;
+        text-transform: uppercase;
+        font-family: "Bueno", Impact, sans-serif;
+        font-weight: 400;
+    }
+
+    #loadMoreBtn:hover {
+        background: var(--primary);
+        transform: translateY(-2px);
+    }
+
+    #loadMoreBtn:active {
+        transform: translateY(0);
+    }
+
+    .progress-text {
+        margin-top: 14px;
+        font-size: 0.78rem;
+        color: var(--muted);
+    }
+
+    .progress-bar {
+        width: 140px;
+        height: 2px;
+        background: var(--border);
+        margin: 10px auto 0;
+        border-radius: 2px;
+        overflow: hidden;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: var(--rust);
+        border-radius: 2px;
+        transition: width 0.4s ease;
+    }
+
+    .all-loaded {
+        font-size: 0.82rem;
+        color: var(--muted);
+        padding: 10px 0;
+    }
+
+    .all-loaded::before,
+    .all-loaded::after {
+        content: ' — ';
+    }
+</style>
+
+<div class="blogs-sec">
+    <div class="wrapper">
+        <div class="blogs-inner">
+            <div class="blogs-left">
+                <div class="blogs-left-inner">
+                    <div class="blogs-title">
+                        <h2>Insights & Inspiration</h2>
+                    </div>
+                    <div class="blogs-description">
+                        <p>Explore the latest trends, tips, and stories in design, technology, and marketing. Stay
+                            inspired and informed with our expert insights.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="blogs-right">
+
+                <!-- Blog List -->
+                <div class="blogs-box" id="blogList"></div>
+
+                <!-- Load More -->
+                <div class="load-more-wrap" id="loadMoreWrap">
+                    <button id="loadMoreBtn" onclick="loadMore()">Load More</button>
+                    <div class="progress-text" id="progressText" style="display: none;"></div>
+                    <div class="progress-bar" style="display: none;">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -266,3 +364,97 @@
 
 </body>
 </html>
+
+<script>
+    /* ═══════════════════════════════════════════════════
+        ✏️  BLOG DATA — Add / edit / remove posts here
+       ═══════════════════════════════════════════════════
+       Fields:
+         title        — post title
+         excerpt      — short description
+         image        — image URL (or "" for placeholder)
+         date         — display date string
+         category     — label shown in red
+         reading_time — e.g. "5 min" (or "" to hide)
+         link         — href for the post
+    */
+    const BLOG_POSTS = [
+        {
+            title: "Empowering Creators: The Future of CMS & MCN Services",
+            excerpt: "From music rights management to global advertising solutions, modern CMS and MCN services are transforming how creators and brands grow, monetize, and thrive in the digital ecosystem.",
+            image: "./images/blog-img.png",
+            date: "March 29, 2026",
+            category: "Digital Media",
+            reading_time: "5 min",
+            link: "/empowering-creators-the-future-of-cms-and-mcn-services"
+        }
+    ];
+    /* ⚙️ Posts revealed per "Load More" click */
+    const POSTS_PER_LOAD = 4;
+
+    /* ─── engine ─── */
+    let loaded = 0;
+
+    function loadMore() {
+        const list = document.getElementById('blogList');
+        const batch = BLOG_POSTS.slice(loaded, loaded + POSTS_PER_LOAD);
+
+        batch.forEach((post, i) => {
+            const img = post.image
+                ? `<img src="${esc(post.image)}" alt="${esc(post.title)}" loading="lazy">`
+                : `<div class="no-img" style="color:var(--primary);">✦</div>`;
+
+            const rt = post.reading_time
+                ? `<div class="reading-time">Reading Time: <span>${esc(post.reading_time)}</span></div>`
+                : `<div></div>`;
+
+            const el = document.createElement('div');
+            el.className = 'blog-box';
+            el.style.animationDelay = (i * 70) + 'ms';
+            el.innerHTML = `
+          <div class="blog-image"><a href="${esc(post.link)}">${img}</a></div>
+          <div class="blog-content">
+            <div>
+              <div class="blog-meta" style="display:none">
+                <span class="blog-category">${esc(post.category)}</span>
+                <span class="blog-date">${esc(post.date)}</span>
+              </div>
+              <div class="blog-title">
+                <h2><a href="${esc(post.link)}">${esc(post.title)}</a></h2>
+              </div>
+              <p class="blog-excerpt">${esc(post.excerpt)}</p>
+            </div>
+            <div class="blog-actions">
+              ${rt}
+              <div class="blog-link"><a href="${esc(post.link)}">Read More</a></div>
+            </div>
+          </div>
+        `;
+            list.appendChild(el);
+        });
+
+        loaded += batch.length;
+
+        // update progress
+        const total = BLOG_POSTS.length;
+        document.getElementById('progressText').textContent = `${loaded} of ${total} articles`;
+        document.getElementById('progressFill').style.width = Math.round((loaded / total) * 100) + '%';
+
+        // hide button when all loaded
+        if (loaded >= total) {
+            document.getElementById('loadMoreBtn').style.display = 'none';
+            const done = document.createElement('div');
+            done.className = 'all-loaded';
+            done.textContent = "You've read it all";
+            document.getElementById('loadMoreWrap').appendChild(done);
+        }
+    }
+
+    function esc(s) {
+        return String(s)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    loadMore(); // show first batch on page load
+</script>

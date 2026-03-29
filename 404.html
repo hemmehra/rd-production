@@ -1,6 +1,28 @@
 
 
 
+<script>
+  (function () {
+    var path = window.location.pathname;
+  
+    // Run only if ends with "/" AND not root "/"
+    if (path.length > 1 && path.endsWith("/")) {
+      var newPath = path.replace(/\/+$/, ""); // remove trailing slash(es)
+  
+      var newUrl =
+        window.location.origin +
+        newPath +
+        window.location.search +
+        window.location.hash;
+  
+      // Prevent infinite loop
+      if (newUrl !== window.location.href) {
+        window.location.replace(newUrl); // behaves like 301 (no back history)
+      }
+    }
+  })();
+</script>
+
 <!doctype html>
 <html lang="en" class="no-js">
 
@@ -210,6 +232,7 @@
     <script src="./js/animation.gsap.js"></script>
     <script src="./js/fancybox.umd.js"></script>
     <script src="./js/lax.js"></script>
+    <script src="./js/parsley.min.js"></script>
     
     <!-- Accordion -->
     <script>
@@ -266,25 +289,3 @@
 </body>
 </html>
 
-
-<script>
-    (function () {
-      var path = window.location.pathname;
-    
-      // Run only if ends with "/" AND not root "/"
-      if (path.length > 1 && path.endsWith("/")) {
-        var newPath = path.replace(/\/+$/, ""); // remove trailing slash(es)
-    
-        var newUrl =
-          window.location.origin +
-          newPath +
-          window.location.search +
-          window.location.hash;
-    
-        // Prevent infinite loop
-        if (newUrl !== window.location.href) {
-          window.location.replace(newUrl); // behaves like 301 (no back history)
-        }
-      }
-    })();
-</script>

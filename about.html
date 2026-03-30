@@ -105,7 +105,468 @@
 
 
 
-<h1>About Us</h1>
+<style>
+    :root {
+        --bg: #0b0b0d;
+        --panel: #111114;
+        --panel-2: #141418;
+        --text: #f5f5f7;
+        --muted: #ffffff;
+        --accent-soft: rgba(214, 180, 106, 0.14);
+        --max: 1180px;
+    }
+
+
+    body {
+        color: var(--text);
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .container {
+        width: min(100% - 32px, var(--max));
+        margin: 0 auto;
+    }
+
+    .hero {
+        display: flex;
+        align-items: center;
+        padding: 32px 0 40px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .brand {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .brand .name {
+        font-size: 0.95rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+    }
+
+    .brand .tag {
+        color: var(--muted);
+        font-size: 0.92rem;
+    }
+
+    .section-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--white);
+        font-size: 0.82rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+    }
+
+    .section-label::before {
+        content: "";
+        width: 42px;
+        height: 1px;
+        background: var(--white);
+        opacity: 0.85;
+    }
+
+    .hero-grid {
+        display: grid;
+        grid-template-columns: 1.25fr 0.75fr;
+        gap: 40px;
+        align-items: end;
+    }
+
+    .hero h1 {
+        font-size: clamp(5rem, 7vw, 9rem);
+        text-transform: uppercase;
+        font-family: Bueno, Impact, sans-serif;
+        font-weight: 400;
+        line-height: 0.9;
+    }
+
+    .lead {
+        margin: 24px 0 0;
+        color: var(--muted);
+        font-size: 2rem;
+        max-width: 58ch;
+    }
+
+    .hero-card {
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 28px;
+        backdrop-filter: blur(10px);
+    }
+
+    .hero-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 2rem;
+    }
+
+    .hero-card strong {
+        display: block;
+        color: var(--text);
+        font-size: 4rem;
+        margin-bottom: 8px;
+        font-family: Bueno, Impact, sans-serif;
+        letter-spacing: 0.05em;
+    }
+
+    .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-top: 16px;
+    }
+
+    .metric {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 18px 18px 16px;
+    }
+
+    .metric .value {
+        font-size: 4rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+        font-family: Bueno, Impact, sans-serif;
+        letter-spacing: 0.05em;
+    }
+
+    .metric .label {
+        color: var(--muted);
+        font-size: 2rem;
+    }
+
+    .content {
+        padding: 20px 0 90px;
+    }
+
+    .section {
+        padding: 100px 0;
+        border-top: 1px solid var(--line);
+    }
+
+    .section h2 {
+        margin: 0 0 18px;
+        font-size: clamp(4rem, 7vw, 5rem);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-family: Bueno, Impact, sans-serif;
+        font-weight: 400;
+        line-height: 0.9;
+    }
+
+    .section p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 78ch;
+        font-size: 2rem;
+    }
+
+    .services {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-top: 24px;
+    }
+
+    .service {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 20px;
+        min-height: 120px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .service span {
+        color: var(--muted);
+        font-size: 2rem;
+    }
+
+    .service strong {
+        display: block;
+        margin-bottom: 10px;
+        letter-spacing: 0.05em;
+        font-size: 2rem;
+    }
+
+    .pill-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 24px;
+    }
+
+    .pill {
+        padding: 14px 16px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        border: 1px solid rgba(214, 180, 106, 0.24);
+        color: #f2e8d1;
+        text-align: center;
+        font-size: 2rem;
+    }
+
+    .values {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-top: 24px;
+    }
+
+    .value-card {
+        padding: 22px;
+        border-radius: 20px;
+        background: var(--panel-2);
+        border: 1px solid var(--line);
+    }
+
+    .value-card .index {
+        color: var(--accent);
+        font-size: 1.5rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    .value-card h3 {
+        margin: 0 0 10px;
+        font-size: 2rem;
+    }
+
+    .value-card p {
+        margin: 0;
+        color: var(--muted);
+    }
+
+    .cta {
+        margin-top: 24px;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 20px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--text);
+        font-weight: 500;
+        transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+        transform: translateY(-1px);
+        border-color: rgba(214, 106, 106, 0.45);
+        background: rgba(214, 180, 106, 0.06);
+    }
+
+    .btn.primary {
+        background: var(--text);
+        color: #111;
+        border-color: transparent;
+    }
+
+    @media (max-width: 992px) {
+
+        .hero-grid,
+        .services,
+        .metrics,
+        .values,
+        .pill-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .hero-grid {
+            align-items: start;
+        }
+    }
+
+    @media (max-width: 767px) {
+
+        .hero-grid,
+        .services,
+        .metrics,
+        .values,
+        .pill-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .hero {
+            min-height: auto;
+            padding-top: 20px;
+        }
+
+        .section {
+            padding: 40px 0;
+        }
+
+
+        .metric .value {
+            font-size: 3rem;
+        }
+
+        .hero-card strong {
+            font-size: 3rem;
+        }
+
+        
+    .metric {
+        padding: 28px;
+    }
+
+    }
+
+</style>
+
+<section class="hero">
+    <div class="wrapper">
+
+        <div class="hero-grid">
+            <div>
+                <div class="section-label">About Us</div>
+                <h1>Built to amplify every voice, every brand.</h1>
+                <p class="lead">
+                    We are a full-service digital media company powering creators, artists, and brands through CMS/MCN
+                    management,
+                    music rights, label services, and global advertising — all under one roof.
+                </p>
+            </div>
+
+            <aside class="hero-card">
+                <strong>Our Story</strong>
+                <p>
+                    Great creative work deserves the infrastructure to thrive. Redship Digital bridges artistic vision
+                    and commercial success
+                    with rights management, distribution, brand partnerships, and global reach.
+                </p>
+            </aside>
+        </div>
+
+        <div class="metrics" aria-label="Company metrics">
+            <div class="metric">
+                <div class="value">25+</div>
+                <div class="label">Creators &amp; Artists</div>
+            </div>
+            <div class="metric">
+                <div class="value">100%</div>
+                <div class="label">focused in market</div>
+            </div>
+            <div class="metric">
+                <div class="value">₹120L+</div>
+                <div class="label">Revenue Generated</div>
+            </div>
+            <div class="metric">
+                <div class="value">98%</div>
+                <div class="label">Client Satisfaction</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="wrapper">
+        <div class="section">
+            <div class="section-label">What We Do</div>
+            <h2>Services designed for scale.</h2>
+            <div class="services">
+                <div class="service"><strong>CMS / MCN Management</strong><span>Multi-channel network operations and
+                        creator infrastructure.</span></div>
+                <div class="service"><strong>Music Rights &amp; Licensing</strong><span>Rights administration and
+                        licensing across global markets.</span></div>
+                <div class="service"><strong>Artist &amp; Label Services</strong><span>Release support, growth strategy,
+                        and label operations.</span></div>
+                <div class="service"><strong>Global Advertising Solutions</strong><span>Campaigns built for reach,
+                        performance, and revenue.</span></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-label">Focus Areas</div>
+            <div class="pill-grid">
+                <div class="pill">Creator Economy</div>
+                <div class="pill">Digital Distribution</div>
+                <div class="pill">Brand Partnerships</div>
+                <div class="pill">Revenue Optimization</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-label">Mission</div>
+            <h2>Media infrastructure with creative intent.</h2>
+            <p>
+                Redship Digital exists at the intersection of culture, technology, and commerce. From managing
+                multi-channel
+                networks to
+                negotiating music licensing deals across 120+ countries, the goal is simple: help creators and brands
+                grow with clarity,
+                trust, and global execution.
+            </p>
+        </div>
+
+        <div class="section">
+            <div class="section-label">Values</div>
+            <h2>What we stand for.</h2>
+            <div class="values">
+                <div class="value-card">
+                    <div class="index">01</div>
+                    <h3>Creator First</h3>
+                    <p>Every decision starts with the creator. Success is measured by the success of the people we
+                        serve.</p>
+                </div>
+                <div class="value-card">
+                    <div class="index">02</div>
+                    <h3>Radical Transparency</h3>
+                    <p>Open reporting, honest conversations, and real-time dashboards instead of black-box systems.</p>
+                </div>
+                <div class="value-card">
+                    <div class="index">03</div>
+                    <h3>Global Thinking</h3>
+                    <p>Local market understanding with a global team built to make campaigns resonate authentically.</p>
+                </div>
+                <div class="value-card">
+                    <div class="index">04</div>
+                    <h3>Long-term Partnership</h3>
+                    <p>Not quick wins. Durable relationships that compound through trust and aligned growth.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-label">Call to Action</div>
+            <h2>Ready to scale your vision?</h2>
+            <p>
+                Whether you're an independent artist, a growing creator, or a global brand, Redship Digital has the
+                expertise,
+                network,
+                and execution to take you further.
+            </p>
+            <div class="cta">
+                <a class="btn primary" href="/contact">Start a Conversation</a>
+                <a class="btn" href="/projects">View Our Work</a>
+            </div>
+        </div>
+
+    </div>
+</section>
 
 
 
@@ -192,13 +653,18 @@
             <div class="wrapper">
                 <div>
                     <div class="footer-copyright">
-                        <!-- get_permalink(3) → Privacy Policy page -->
-                        <p>© 2018 - 2025 - Present Redship Digital | All rights reserved | <a href="/privacy-policy/">Privacy Policy</a></p>
+                        <p>© 2018 - 2026 - Present Redship Digital | All rights reserved | <a href="/privacy-policy">Privacy Policy</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
+
+
+    <div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+
     <!-- ============================================================
          End footer
     ============================================================ -->
@@ -211,6 +677,23 @@
     <script src="./js/animation.gsap.js"></script>
     <script src="./js/fancybox.umd.js"></script>
     <script src="./js/lax.js"></script>
+    
+
+    
+    <script>
+        // Cursor
+        const cursor = document.getElementById('cursor');
+        const ring = document.getElementById('cursorRing');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+        function animateCursor() {
+            cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+            rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+            ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+    </script>
     
     <!-- Accordion -->
     <script>

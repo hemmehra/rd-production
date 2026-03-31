@@ -1389,7 +1389,7 @@ h1.banner-title br {
     width: 75%;
     margin: 0 auto;
 }
-.single-blog-title h2{
+.single-blog-title h1{
     color: var(--white);
     font-size: 5rem;
     line-height: 1.1;

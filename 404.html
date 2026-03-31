@@ -1,20 +1,22 @@
 
 
 
+
+
 <script>
   (function () {
     var path = window.location.pathname;
-  
+
     // Run only if ends with "/" AND not root "/"
     if (path.length > 1 && path.endsWith("/")) {
       var newPath = path.replace(/\/+$/, ""); // remove trailing slash(es)
-  
+
       var newUrl =
         window.location.origin +
         newPath +
         window.location.search +
         window.location.hash;
-  
+
       // Prevent infinite loop
       if (newUrl !== window.location.href) {
         window.location.replace(newUrl); // behaves like 301 (no back history)
@@ -29,8 +31,20 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page Not Found</title>
-    <meta name="description" content="Page not found">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <meta name="robots" content="index, follow">
+
+    <title>Page Not Found | Redship Digital</title>
+    <meta name="description"
+  content="Oops! The page you're looking for doesn't exist. Redship Digital offers CMS/MCN, music rights, artist/label services, and advertising solutions to help creators and brands succeed in the digital world.">
+<meta name="keywords"
+  content="404, not found, Redship Digital, CMS, MCN, music rights, artist services, label services, digital advertising, creator solutions, brand solutions">
+<meta name="robots" content="noindex, nofollow">
+
+
     <!-- Fancybox CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
     <!-- Theme stylesheet -->
@@ -77,19 +91,24 @@
                                         <div class="nav-menu-inner" id="nav-menu-inner-sec">
                                             <ul class="nav-menu">
                                                 <li class="nav-link-block">
-                                                    <a href="/"><span class="nav-link">Home <span class="link-count">01</span></span></a>
+                                                    <a href="/"><span class="nav-link">Home <span
+                                                                class="link-count">01</span></span></a>
                                                 </li>
                                                 <li class="nav-link-block">
-                                                    <a href="/about"><span class="nav-link">About <span class="link-count">02</span></span></a>
+                                                    <a href="/about"><span class="nav-link">About <span
+                                                                class="link-count">02</span></span></a>
                                                 </li>
                                                 <li class="nav-link-block">
-                                                    <a href="/projects"><span class="nav-link">Projects <span class="link-count">03</span></span></a>
+                                                    <a href="/projects"><span class="nav-link">Projects <span
+                                                                class="link-count">03</span></span></a>
                                                 </li>
                                                 <li class="nav-link-block">
-                                                    <a href="/contact"><span class="nav-link">Contact <span class="link-count">04</span></span></a>
+                                                    <a href="/contact"><span class="nav-link">Contact <span
+                                                                class="link-count">04</span></span></a>
                                                 </li>
                                                 <li class="nav-link-block">
-                                                    <a href="/blog"><span class="nav-link">Blog<span class="link-count">05</span></span></a>
+                                                    <a href="/blog"><span class="nav-link">Blog<span
+                                                                class="link-count">05</span></span></a>
                                                 </li>
                                             </ul>
                                             <div class="nav-social-media-sec">
@@ -100,7 +119,8 @@
                                                     <a href="https://www.facebook.com/redshipdigital" target="_blank">
                                                         <div class="nav-social-link">FACEBOOK</div>
                                                     </a>
-                                                    <a href="http://linkedin.com/company/redshipdigital" target="_blank">
+                                                    <a href="http://linkedin.com/company/redshipdigital"
+                                                        target="_blank">
                                                         <div class="nav-social-link">LINKEDIN</div>
                                                     </a>
                                                 </div>
@@ -123,18 +143,16 @@
             <div id="primary" class="content-area">
                 <main id="main" class="site-main">
 
-
-
 <style>
   .unique-body-404 {
-      margin: 0;
-      padding: 180px 0 200px;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      min-height: 100vh;
+    margin: 0;
+    padding: 180px 0 200px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100vh;
   }
 
   .heading-404-code {
@@ -147,17 +165,17 @@
   }
 
   .text-404-title {
-      font-size: 28px;
-      margin: 10px 0;
+    font-size: 28px;
+    margin: 10px 0;
   }
 
   .text-404-description {
-      font-size: 16px;
-      color: #cbd5f5;
-      margin-bottom: 30px;
+    font-size: 16px;
+    color: #cbd5f5;
+    margin-bottom: 30px;
   }
 
-  .text-404-btn{
+  .text-404-btn {
     color: var(--white);
     padding: 18px 20px 14px;
   }
@@ -167,17 +185,16 @@
       padding: 80px 0 100px;
     }
   }
-
 </style>
 
 <div class="unique-body-404">
   <div class="wrapper">
-      <h1 class="heading-404-code">404</h1>
-      <h2 class="text-404-title">Page Not Found</h2>
-      <p class="text-404-description">
-          Sorry, the page you are looking for doesn’t exist or has been moved.
-      </p>
-      <a href="/" class="site-btn text-404-btn">Go Back Home</a>
+    <h1 class="heading-404-code">404</h1>
+    <h2 class="text-404-title">Page Not Found</h2>
+    <p class="text-404-description">
+      Sorry, the page you are looking for doesn’t exist or has been moved.
+    </p>
+    <a href="/" class="site-btn text-404-btn">Go Back Home</a>
   </div>
 </div>
 
@@ -362,4 +379,3 @@
 
 </body>
 </html>
-

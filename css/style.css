@@ -141,7 +141,7 @@ main {
     position: relative;
     z-index: 2;
     background: var(--black2);
-    height: 100%;
+    min-height: 100%;
 }
 
 .header-main {
@@ -1598,8 +1598,17 @@ h1.banner-title br {
 body:hover .cursor {
     opacity: 1;
 }
-
-
+.email-option{
+    padding: 50px 0 0;
+    text-align: center;
+    color: var(--white);
+}
+.email-option-divider{
+    margin-bottom: 30px;
+}
+.email-option a{
+    color: var(--white);
+}
 
 @media screen and (max-width: 1400px) {
 
